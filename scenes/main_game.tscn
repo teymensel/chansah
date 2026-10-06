@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://suy74h8oyty7"]
+
+[ext_resource type="Script" uid="uid://b2dvqwphuwtpu" path="res://scripts/city_builder.gd" id="1_city"]
+[ext_resource type="PackedScene" path="res://scenes/horse.tscn" id="2_horse"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/esref_npc.tscn" id="4_esref"]
+[ext_resource type="PackedScene" path="res://scenes/mobile_hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://scenes/dialogue_system.tscn" id="6_diag"]
+[ext_resource type="PackedScene" path="res://scenes/chess_interrogation.tscn" id="7_chess"]
+[ext_resource type="Script" uid="uid://cdqob3idslxik" path="res://scripts/game_manager.gd" id="8_gm"]
+[ext_resource type="PackedScene" path="res://scenes/prayer_system.tscn" id="9_prayer"]
+[ext_resource type="Script" path="res://scripts/day_night_cycle.gd" id="10_daynight"]
+[ext_resource type="Script" path="res://scripts/city_fauna.gd" id="11_fauna"]
+[ext_resource type="Script" path="res://scripts/compass_hud.gd" id="12_compass"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.25, 0.48, 0.82, 1)
+sky_horizon_color = Color(0.86, 0.74, 0.6, 1)
+ground_bottom_color = Color(0.18, 0.15, 0.12, 1)
+ground_horizon_color = Color(0.65, 0.58, 0.48, 1)
+sun_angle_max = 35.0
+
+[sub_resource type="Sky" id="Sky_env"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 2
+sky = SubResource("Sky_env")
+ambient_light_source = 3
+ambient_light_color = Color(0.85, 0.8, 0.72, 1)
+ambient_light_sky_contribution = 0.55
+tonemap_mode = 3
+glow_enabled = true
+glow_intensity = 0.35
+glow_bloom = 0.12
+fog_enabled = true
+fog_light_color = Color(0.84, 0.76, 0.65, 1)
+fog_density = 0.003
+
+[node name="MainGame" type="Node3D" unique_id=450236266]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1513641583]
+environment = SubResource("Environment_main")
+
+[node name="SunLight" type="DirectionalLight3D" parent="." unique_id=525583069]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 30, 0)
+light_color = Color(1, 0.92, 0.82, 1)
+light_energy = 1.6
+shadow_enabled = true
+shadow_bias = 0.04
+shadow_blur = 1.2
+directional_shadow_max_distance = 160.0
+
+[node name="CityBuilder" type="Node3D" parent="." unique_id=1701610919]
+script = ExtResource("1_city")
+
+[node name="Horse" parent="." unique_id=1275463519 instance=ExtResource("2_horse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+
+[node name="EsrefBeyNPC" parent="." unique_id=2059171313 instance=ExtResource("4_esref")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -5, 0, -6)
+
+[node name="Player" parent="." unique_id=1421672830 instance=ExtResource("3_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="MobileHUD" parent="." unique_id=554643107 instance=ExtResource("5_hud")]
+
+[node name="DialogueSystem" parent="." unique_id=469602604 instance=ExtResource("6_diag")]
+
+[node name="ChessInterrogation" parent="." unique_id=1277172014 instance=ExtResource("7_chess")]
+
+[node name="PrayerSystem" parent="." unique_id=1292396992 instance=ExtResource("9_prayer")]
+visible = false
+
+[node name="GameManager" type="Node" parent="." unique_id=351330187 node_paths=PackedStringArray("player_node", "hud_node", "dialogue_node", "chess_node", "prayer_node", "horse_node")]
+script = ExtResource("8_gm")
+player_node = NodePath("../Player")
+hud_node = NodePath("../MobileHUD")
+dialogue_node = NodePath("../DialogueSystem")
+chess_node = NodePath("../ChessInterrogation")
+prayer_node = NodePath("../PrayerSystem")
+horse_node = NodePath("../Horse")
+
+[node name="DayNightCycle" type="Node" parent="." unique_id=812349102]
+script = ExtResource("10_daynight")
+
+[node name="CityFauna" type="Node3D" parent="." unique_id=918237461]
+script = ExtResource("11_fauna")
+
+[node name="CompassHUD" type="CanvasLayer" parent="." unique_id=741029384]
+script = ExtResource("12_compass")

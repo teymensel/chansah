@@ -1,0 +1,11 @@
+Model Information:
+* title:	Packing Gown
+* source:	https://sketchfab.com/3d-models/packing-gown-792092347f1e4043af27dcb96ba3177f
+* author:	A9908244 (https://sketchfab.com/A9908244)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Packing Gown" (https://sketchfab.com/3d-models/packing-gown-792092347f1e4043af27dcb96ba3177f) by A9908244 (https://sketchfab.com/A9908244) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

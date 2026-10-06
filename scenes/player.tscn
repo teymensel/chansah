@@ -1,0 +1,124 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
+[ext_resource type="PackedScene" path="res://assets/models/Soldier.glb" id="2_soldier_glb"]
+[ext_resource type="PackedScene" path="res://scenes/prayer_avatar.tscn" id="3_prayer_avatar"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.85
+
+[sub_resource type="StandardMaterial3D" id="Mat_Fez"]
+albedo_color = Color(0.78, 0.1, 0.1, 1)
+roughness = 0.8
+
+[sub_resource type="CylinderMesh" id="CylMesh_fez"]
+material = SubResource("Mat_Fez")
+top_radius = 0.11
+bottom_radius = 0.13
+height = 0.16
+
+[sub_resource type="StandardMaterial3D" id="Mat_Tassel"]
+albedo_color = Color(0.08, 0.08, 0.08, 1)
+
+[sub_resource type="CylinderMesh" id="CylMesh_tassel"]
+material = SubResource("Mat_Tassel")
+top_radius = 0.015
+bottom_radius = 0.025
+height = 0.15
+
+[sub_resource type="StandardMaterial3D" id="Mat_GunMetal"]
+albedo_color = Color(0.2, 0.2, 0.22, 1)
+metallic = 0.95
+roughness = 0.25
+
+[sub_resource type="StandardMaterial3D" id="Mat_WoodGrip"]
+albedo_color = Color(0.28, 0.16, 0.08, 1)
+roughness = 0.55
+
+[sub_resource type="StandardMaterial3D" id="Mat_BrassGold"]
+albedo_color = Color(0.92, 0.78, 0.32, 1)
+metallic = 0.9
+roughness = 0.25
+
+[sub_resource type="BoxMesh" id="BoxMesh_gun_barrel"]
+material = SubResource("Mat_GunMetal")
+size = Vector3(0.06, 0.09, 0.32)
+
+[sub_resource type="CylinderMesh" id="CylMesh_cylinder"]
+material = SubResource("Mat_BrassGold")
+top_radius = 0.065
+bottom_radius = 0.065
+height = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_grip"]
+material = SubResource("Mat_WoodGrip")
+size = Vector3(0.055, 0.16, 0.08)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hammer"]
+material = SubResource("Mat_GunMetal")
+size = Vector3(0.02, 0.05, 0.04)
+
+[sub_resource type="PrismMesh" id="PrismMesh_sight"]
+material = SubResource("Mat_BrassGold")
+size = Vector3(0.015, 0.03, 0.02)
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
+spring_length = 3.6
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.6)
+current = true
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="PrayerAvatar" parent="Visual" instance=ExtResource("3_prayer_avatar")]
+visible = false
+
+[node name="SoldierModel" parent="Visual" instance=ExtResource("2_soldier_glb")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="HandAttachment" type="BoneAttachment3D" parent="Visual/SoldierModel/Character/Skeleton3D" index="1"]
+bone_name = "mixamorig_RightHand"
+bone_idx = 26
+
+[node name="GunMesh" type="Node3D" parent="Visual/SoldierModel/Character/Skeleton3D/HandAttachment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.05, 0.12, 0.05)
+
+[node name="Barrel" type="MeshInstance3D" parent="Visual/SoldierModel/Character/Skeleton3D/HandAttachment/GunMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+mesh = SubResource("BoxMesh_gun_barrel")
+
+[node name="Cylinder" type="MeshInstance3D" parent="Visual/SoldierModel/Character/Skeleton3D/HandAttachment/GunMesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.04)
+mesh = SubResource("CylMesh_cylinder")
+
+[node name="Grip" type="MeshInstance3D" parent="Visual/SoldierModel/Character/Skeleton3D/HandAttachment/GunMesh"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, -0.1, 0.08)
+mesh = SubResource("BoxMesh_grip")
+
+[node name="Hammer" type="MeshInstance3D" parent="Visual/SoldierModel/Character/Skeleton3D/HandAttachment/GunMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0.07)
+mesh = SubResource("BoxMesh_hammer")
+
+[node name="Sight" type="MeshInstance3D" parent="Visual/SoldierModel/Character/Skeleton3D/HandAttachment/GunMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.055, -0.24)
+mesh = SubResource("PrismMesh_sight")
+
+[node name="MuzzleFlash" type="OmniLight3D" parent="Visual/SoldierModel/Character/Skeleton3D/HandAttachment/GunMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
+light_color = Color(1, 0.85, 0.4, 1)
+light_energy = 4.0
+omni_range = 5.0

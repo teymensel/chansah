@@ -1,0 +1,11 @@
+Model Information:
+* title:	Prayer niche (mihrab)
+* source:	https://sketchfab.com/3d-models/prayer-niche-mihrab-aa37c0b5d3ee4077a12ac5e31aa873e4
+* author:	Thomas Flynn (https://sketchfab.com/nebulousflynn)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Prayer niche (mihrab)" (https://sketchfab.com/3d-models/prayer-niche-mihrab-aa37c0b5d3ee4077a12ac5e31aa873e4) by Thomas Flynn (https://sketchfab.com/nebulousflynn) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

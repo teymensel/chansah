@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/esref_npc.gd" id="1_esref"]
+[ext_resource type="PackedScene" path="res://assets/models/Soldier.glb" id="2_soldier_glb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_esref"]
+radius = 0.45
+height = 1.85
+
+[sub_resource type="StandardMaterial3D" id="Mat_PashaFez"]
+albedo_color = Color(0.65, 0.08, 0.08, 1)
+roughness = 0.8
+
+[sub_resource type="CylinderMesh" id="CylMesh_pasha_fez"]
+material = SubResource("Mat_PashaFez")
+top_radius = 0.12
+bottom_radius = 0.14
+height = 0.17
+
+[sub_resource type="StandardMaterial3D" id="Mat_GoldTrim"]
+albedo_color = Color(0.95, 0.82, 0.22, 1)
+metallic = 0.95
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylMesh_gold_tassel"]
+material = SubResource("Mat_GoldTrim")
+top_radius = 0.02
+bottom_radius = 0.035
+height = 0.16
+
+[sub_resource type="BoxMesh" id="BoxMesh_epaulet"]
+material = SubResource("Mat_GoldTrim")
+size = Vector3(0.25, 0.06, 0.14)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_interact"]
+radius = 4.2
+
+[node name="EsrefBeyNPC" type="CharacterBody3D" groups=["interactables"]]
+script = ExtResource("1_esref")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925, 0)
+shape = SubResource("CapsuleShape3D_esref")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="SoldierModel" parent="Visual" instance=ExtResource("2_soldier_glb")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+
+
+[node name="NameLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35, 0)
+billboard = 1
+text = "Eşref Bey (Teşkilât Reisi)
+[Konuşmak için yaklaş]"
+font_size = 22
+outline_size = 5
+modulate = Color(1, 0.88, 0.35, 1)
+
+[node name="InteractArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_interact")

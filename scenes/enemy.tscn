@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_enemy"]
+[ext_resource type="PackedScene" path="res://assets/models/Soldier.glb" id="2_soldier_glb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enemy"]
+radius = 0.45
+height = 1.85
+
+[sub_resource type="StandardMaterial3D" id="Mat_BanditHood"]
+albedo_color = Color(0.12, 0.12, 0.15, 1)
+roughness = 0.9
+
+[sub_resource type="SphereMesh" id="SphereMesh_bandit_hood"]
+material = SubResource("Mat_BanditHood")
+radius = 0.2
+height = 0.35
+
+[sub_resource type="StandardMaterial3D" id="Mat_SteelBlade"]
+albedo_color = Color(0.85, 0.88, 0.92, 1)
+metallic = 0.95
+roughness = 0.15
+
+[sub_resource type="BoxMesh" id="BoxMesh_dagger"]
+material = SubResource("Mat_SteelBlade")
+size = Vector3(0.04, 0.08, 0.45)
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
+script = ExtResource("1_enemy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925, 0)
+shape = SubResource("CapsuleShape3D_enemy")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="SoldierModel" parent="Visual" instance=ExtResource("2_soldier_glb")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="HeadAttachment" type="BoneAttachment3D" parent="Visual/SoldierModel/Character/Skeleton3D" index="1"]
+bone_name = "mixamorig_Head"
+bone_idx = 5
+
+[node name="BanditHood" type="MeshInstance3D" parent="Visual/SoldierModel/Character/Skeleton3D/HeadAttachment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, -0.01)
+mesh = SubResource("SphereMesh_bandit_hood")
+
+[node name="HandAttachment" type="BoneAttachment3D" parent="Visual/SoldierModel/Character/Skeleton3D" index="2"]
+bone_name = "mixamorig_RightHand"
+bone_idx = 26
+
+[node name="Dagger" type="MeshInstance3D" parent="Visual/SoldierModel/Character/Skeleton3D/HandAttachment"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.05, 0.1, 0.12)
+mesh = SubResource("BoxMesh_dagger")
+
+[node name="HealthLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+billboard = 1
+text = "Suikastçı Ajan: 80 HP"
+font_size = 22
+outline_size = 4
+modulate = Color(1, 0.3, 0.3, 1)

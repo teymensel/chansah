@@ -1,0 +1,898 @@
+[gd_scene format=3 uid="uid://ctp2be7uy4kbt"]
+
+[ext_resource type="Script" uid="uid://b71v6gohrttsk" path="res://scripts/mobile_hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" uid="uid://die7ker0ru2m5" path="res://assets/ui/ottoman_map.png" id="2_map"]
+
+[sub_resource type="StyleBoxFlat" id="health_bg"]
+bg_color = Color(0.08, 0.05, 0.04, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.72, 0.25, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="health_fill"]
+bg_color = Color(0.78, 0.16, 0.14, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="stamina_bg"]
+bg_color = Color(0.08, 0.05, 0.04, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85, 0.72, 0.25, 0.6)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="stamina_fill"]
+bg_color = Color(0.95, 0.75, 0.2, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="panel"]
+bg_color = Color(0.12, 0.08, 0.06, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.72, 0.25, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="btn_pressed"]
+bg_color = Color(0.55, 0.38, 0.12, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.92, 0.5, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="banner"]
+bg_color = Color(0.1, 0.08, 0.06, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9, 0.75, 0.25, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="joy_base"]
+bg_color = Color(0.1, 0.08, 0.06, 0.45)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.85, 0.72, 0.25, 0.7)
+corner_radius_top_left = 200
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
+corner_radius_bottom_left = 200
+
+[sub_resource type="StyleBoxFlat" id="joy_knob"]
+bg_color = Color(0.85, 0.72, 0.25, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.92, 0.5, 0.9)
+corner_radius_top_left = 200
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
+corner_radius_bottom_left = 200
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="alt"]
+bg_color = Color(0.4, 0.26, 0.08, 0.88)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.88, 0.35, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="alt_pressed"]
+bg_color = Color(0.7, 0.46, 0.12, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.95, 0.6, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="primary"]
+bg_color = Color(0.55, 0.14, 0.1, 0.88)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.82, 0.35, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="primary_pressed"]
+bg_color = Color(0.82, 0.24, 0.14, 0.96)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.95, 0.6, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="btn"]
+bg_color = Color(0.16, 0.11, 0.07, 0.78)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.85, 0.72, 0.25, 0.9)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="prompt"]
+bg_color = Color(0.18, 0.12, 0.07, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.88, 0.35, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="prompt_pressed"]
+bg_color = Color(0.45, 0.3, 0.1, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.95, 0.6, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="map_panel"]
+bg_color = Color(0.08, 0.06, 0.05, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.88, 0.75, 0.28, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="dot"]
+bg_color = Color(1, 0.88, 0.3, 0.95)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="pip"]
+bg_color = Color(1, 0.88, 0.3, 0.85)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="MobileHUD" type="CanvasLayer" unique_id=1725310721]
+layer = 10
+script = ExtResource("1_hud")
+
+[node name="TopBar" type="Control" parent="." unique_id=908827621]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="HealthBar" type="ProgressBar" parent="TopBar" unique_id=335349881]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 48.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("health_bg")
+theme_override_styles/fill = SubResource("health_fill")
+value = 100.0
+show_percentage = false
+
+[node name="HealthText" type="Label" parent="TopBar/HealthBar" unique_id=476174587]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "100 / 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaminaBar" type="ProgressBar" parent="TopBar" unique_id=607463768]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 54.0
+offset_right = 244.0
+offset_bottom = 64.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("stamina_bg")
+theme_override_styles/fill = SubResource("stamina_fill")
+value = 100.0
+show_percentage = false
+
+[node name="GoldContainer" type="Panel" parent="TopBar" unique_id=1621250196]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -330.0
+offset_top = 16.0
+offset_right = -150.0
+offset_bottom = 56.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("panel")
+
+[node name="GoldText" type="Label" parent="TopBar/GoldContainer" unique_id=1689019382]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 17
+text = "27,350 Akçe"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapBtn" type="Button" parent="TopBar" unique_id=555816466]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -138.0
+offset_top = 12.0
+offset_right = -24.0
+offset_bottom = 60.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("panel")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("panel")
+text = "🗺️ Harita"
+
+[node name="QuestBanner" type="Panel" parent="." unique_id=1250002162]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 14.0
+offset_right = 260.0
+offset_bottom = 54.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("banner")
+
+[node name="QuestText" type="Label" parent="QuestBanner" unique_id=527153669]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.95, 0.88, 0.6, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
+text = "Vazife: Çınar altındaki Eşref Bey ile görüş!"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="VirtualJoystick" type="Control" parent="." unique_id=1472652057]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = -240.0
+offset_right = 228.0
+offset_bottom = -60.0
+grow_vertical = 0
+
+[node name="Base" type="Panel" parent="VirtualJoystick" unique_id=919671879]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("joy_base")
+
+[node name="Knob" type="Panel" parent="VirtualJoystick" unique_id=375629606]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -38.0
+offset_right = 39.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("joy_knob")
+
+[node name="SprintBtn" type="Button" parent="." unique_id=199858251]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 248.0
+offset_top = -150.0
+offset_right = 328.0
+offset_bottom = -70.0
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.95, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("alt")
+theme_override_styles/pressed = SubResource("alt_pressed")
+theme_override_styles/hover = SubResource("alt")
+text = "🏃
+Koş"
+
+[node name="ActionControls" type="Control" parent="." unique_id=681850661]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -444.0
+offset_top = -484.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="ShootBtn" type="Button" parent="ActionControls" unique_id=1803601140]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 328.0
+offset_right = 404.0
+offset_bottom = 452.0
+focus_mode = 0
+theme_override_styles/normal = SubResource("primary")
+theme_override_styles/pressed = SubResource("primary_pressed")
+theme_override_styles/hover = SubResource("primary")
+
+[node name="Label" type="Label" parent="ActionControls/ShootBtn" unique_id=914966164]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 22.0
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.5, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 17
+text = "🎯 ATEŞ"
+horizontal_alignment = 1
+
+[node name="CylinderVisual" type="Label" parent="ActionControls/ShootBtn" unique_id=1933538467]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.7, 0.2, 1)
+theme_override_font_sizes/font_size = 12
+text = "●●●●●●"
+horizontal_alignment = 1
+
+[node name="AmmoText" type="Label" parent="ActionControls/ShootBtn" unique_id=906093977]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "6/6"
+horizontal_alignment = 1
+
+[node name="JumpBtn" type="Button" parent="ActionControls" unique_id=1719572005]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 372.0
+offset_right = 264.0
+offset_bottom = 452.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("btn")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn")
+text = "⬆️
+Zıpla"
+
+[node name="CrouchBtn" type="Button" parent="ActionControls" unique_id=1928229428]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 388.0
+offset_right = 164.0
+offset_bottom = 460.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("btn")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn")
+text = "🧎
+Eğil"
+
+[node name="AimBtn" type="Button" parent="ActionControls" unique_id=1565446707]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 248.0
+offset_right = 304.0
+offset_bottom = 320.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("btn")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn")
+text = "🎯
+Nişan"
+
+[node name="ReloadBtn" type="Button" parent="ActionControls" unique_id=74688073]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 280.0
+offset_right = 216.0
+offset_bottom = 352.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("btn")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn")
+text = "🔄
+Doldur"
+
+[node name="MeleeBtn" type="Button" parent="ActionControls" unique_id=1835571434]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 296.0
+offset_right = 128.0
+offset_bottom = 368.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("btn")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn")
+text = "⚔️
+Vuruş"
+
+[node name="GallopBtn" type="Button" parent="ActionControls" unique_id=2093808562]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 150.0
+offset_right = 316.0
+offset_bottom = 230.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.95, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("alt")
+theme_override_styles/pressed = SubResource("alt_pressed")
+theme_override_styles/hover = SubResource("alt")
+text = "⚡
+Dörtnal"
+
+[node name="InteractBtn" type="Button" parent="ActionControls" unique_id=1760423140]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 40.0
+offset_right = 404.0
+offset_bottom = 108.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("btn")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn")
+text = "🗣️
+Konuş"
+
+[node name="HorseBtn" type="Button" parent="ActionControls" unique_id=17543107]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 120.0
+offset_right = 404.0
+offset_bottom = 188.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("btn")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn")
+text = "🐎
+At"
+
+[node name="AbdestBtn" type="Button" parent="ActionControls" unique_id=1995556272]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 200.0
+offset_right = 404.0
+offset_bottom = 268.0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6, 0.9, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("btn")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn")
+text = "💧
+Abdest"
+
+[node name="FloatingInteractPrompt" type="Button" parent="." unique_id=993537731]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -130.0
+offset_right = 200.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.95, 0.6, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("prompt")
+theme_override_styles/pressed = SubResource("prompt_pressed")
+theme_override_styles/hover = SubResource("prompt")
+text = "🗣️ Eşref Bey ile Konuş [ DOKUN veya 'E' ]"
+
+[node name="MessageBanner" type="Panel" parent="." unique_id=1197563810]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -200.0
+offset_right = 240.0
+offset_bottom = -146.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("banner")
+
+[node name="Text" type="Label" parent="MessageBanner" unique_id=1909209519]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "Bildirim mesajı"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MapPanel" type="Control" parent="." unique_id=308217718]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="MapPanel" unique_id=94006472]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="MapFrame" type="Panel" parent="MapPanel" unique_id=1667358143]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.08
+anchor_right = 0.95
+anchor_bottom = 0.92
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("map_panel")
+
+[node name="MapTexture" type="TextureRect" parent="MapPanel/MapFrame" unique_id=1153269903]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_map")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="MapPanel/MapFrame" unique_id=1391813792]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 72.0
+offset_top = 16.0
+offset_right = -72.0
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.4, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 20
+text = "Payitaht İstanbul ve Harekat Haritası (19. Yüzyıl)"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="CloseMapBtn" type="Button" parent="MapPanel" unique_id=1239909741]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.95
+anchor_top = 0.08
+anchor_right = 0.95
+anchor_bottom = 0.08
+offset_left = -68.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 68.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("btn")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn")
+text = "✖"
+
+[node name="Crosshair" type="Control" parent="." unique_id=648660998]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Dot" type="Panel" parent="Crosshair" unique_id=203898165]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("dot")
+
+[node name="LineTop" type="Panel" parent="Crosshair" unique_id=531953628]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -18.0
+offset_right = 1.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("pip")
+
+[node name="LineBottom" type="Panel" parent="Crosshair" unique_id=1603571458]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = 7.0
+offset_right = 1.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("pip")
+
+[node name="LineLeft" type="Panel" parent="Crosshair" unique_id=790425924]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -1.0
+offset_right = -7.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("pip")
+
+[node name="LineRight" type="Panel" parent="Crosshair" unique_id=1870820283]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -1.0
+offset_right = 18.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("pip")
